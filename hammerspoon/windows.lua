@@ -10,9 +10,23 @@ function hs.window.left(win)
   local screen = win:screen()
   local max = screen:frame()
 
+  -- We are alredy in the left mode
+  if f.x == max.x and f.y == max.y and  f.h == max.h then
+    if f.w == max.w / 2 then
+      -- Move to the left
+      f.w = max.w / 3
+    elseif f.w == max.w / 3 then
+      -- Move to the right
+      f.w = max.w * 2 / 3
+    else
+      f.w = max.w / 2
+    end
+  else
+    f.w = max.w / 2
+  end
+
   f.x = max.x
   f.y = max.y
-  f.w = max.w / 2
   f.h = max.h
   win:setFrame(f)
 end
